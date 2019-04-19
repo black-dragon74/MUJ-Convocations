@@ -14,14 +14,17 @@ class Login extends CI_Controller
 
         // We need to load our custom helper, that will load the email library
         $this->load->helper('convocation');
-
-
     }
 
     /**
      * This function just renders the login web page to the user
      */
     public function index() {
+        // If already logged in, redirect
+        if ($this->session->userdata('alumni_login') == '1') {
+            redirect(site_url('alumni'), 'refresh');
+        }
+
         $data['title'] = 'Login';
         $this->load->view('login', $data);
     }
@@ -30,6 +33,11 @@ class Login extends CI_Controller
      * I just load the register page
      */
     public function register() {
+        // If already logged in, redirect
+        if ($this->session->userdata('alumni_login') == '1') {
+            redirect(site_url('alumni'), 'refresh');
+        }
+
         $data['title'] = 'Register';
         $this->load->view('register', $data);
     }
@@ -45,7 +53,7 @@ class Login extends CI_Controller
         $regNo = $_POST['regNo'];
 
         // Now we check if this user is allowed to register, if yes, we generate a random password
-        $allowed = $this->db->get_where('whitelist', array('regno' => $regNo))->row();
+        $allowed = $this->db->get_where('alumni', array('regno' => $regNo))->row();
 
         // If not allowed, redirect back to login!
         if (!$allowed) {
@@ -85,7 +93,8 @@ class Login extends CI_Controller
         $dbresult = $this->db->insert('users', array(
             'regno' => $allowed->regno,
             'password' => $hashedPassword,
-            'confirmed' => 0
+            'confirmed' => 0,
+            'paid' => 0
         ));
 
         if ($dbresult) {
@@ -127,7 +136,7 @@ class Login extends CI_Controller
             $this->session->set_userdata('alumni_login', '1');
             $this->session->set_userdata('regno', $isAlumni->regno);
             $this->session->set_userdata('confirmed', $isAlumni->confirmed);
-            $alumniName = $this->db->get_where('whitelist', array('regno' => $username))->row()->name;
+            $alumniName = $this->db->get_where('alumni', array('regno' => $username))->row()->name;
             $this->session->set_userdata('name', $alumniName);
             redirect(site_url('alumni'), 'refresh');
             return;
@@ -151,6 +160,11 @@ class Login extends CI_Controller
      * Just loads the forgot password view
      */
     public function forgot_password() {
+        // If already logged in, redirect
+        if ($this->session->userdata('alumni_login') == '1') {
+            redirect(site_url('alumni'), 'refresh');
+        }
+
         $data['title'] = 'Reset Password';
         $this->load->view('forgot', $data);
     }
@@ -177,11 +191,11 @@ class Login extends CI_Controller
         // Step 1, Generate a new password
         $generatedPassword = substr(md5(rand(100000000,20000000000)), 0, 10);
 
-        $name = $this->db->get_where('whitelist', array('regno' => $username))->row()->name;
+        $name = $this->db->get_where('alumni', array('regno' => $username))->row()->name;
         $content = getPasswordResetEmailHTML($name, $generatedPassword);
 
         // Step 2, send the email, if it is successful, update the password in the database
-        $userEmail = $this->db->get_where('whitelist', array('regno' => $username))->row()->email;
+        $userEmail = $this->db->get_where('alumni', array('regno' => $username))->row()->email;
         if (!email($this, 'Password Reset', $userEmail, $content)) {
             # show_error($this->email->print_debugger());
             $this->session->set_flashdata('error', 'Failed to send the password reset mail.');

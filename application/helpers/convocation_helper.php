@@ -25,9 +25,9 @@ function email($context, $subject, $to, $message) {
     // Set mail config
     $config['mailtype'] = 'html';
     $config['protocol'] = 'smtp';
-    $config['smtp_host'] = 'smtp.gmail.com';
-    $config['smtp_user'] = 'hellouniversum@gmail.com';
-    $config['smtp_pass'] = '****';
+    $config['smtp_host'] = 'smtp.zoho.com';
+    $config['smtp_user'] = 'noreply@nicksuniversum.com';
+    $config['smtp_pass'] = 'QdN66LzNDzcnEBJ';
     $config['smtp_port'] = '465';
     $config['smtp_crypto'] = 'ssl';
     $config['newline'] = "\r\n";
@@ -37,7 +37,7 @@ function email($context, $subject, $to, $message) {
     $context->email->initialize($config);
 
     // Basic thingies for an email
-    $context->email->from('me@nicksuniversum.com', 'Nick');
+    $context->email->from('noreply@nicksuniversum.com', 'Nick');
     $context->email->to($to);
     $context->email->subject($subject);
     $context->email->message($message);

@@ -1,4 +1,4 @@
-<?php require_once "login_includes/header.php" ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); require_once "login_includes/header.php" ?>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
