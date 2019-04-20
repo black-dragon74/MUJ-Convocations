@@ -44,3 +44,13 @@ input[type=file]{
     z-index: -1;
     position: absolute;
 }
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Hack to prevent header and footer from appearing in print media */
+@print{
+    @page :footer {color: #fff }
+    @page :header {color: #fff}
+}

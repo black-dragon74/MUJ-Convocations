@@ -86,37 +86,3 @@
     </section>
     <!-- /.sidebar -->
 </aside>
-<div class="modal modal-success fade in" id="feedback-modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">AMS Feedback</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form id="feedback-form" method="post" autocomplete="off">
-                            <input type="hidden" name="ams_ajax" value="true">
-                            <div class="form-group">
-                                <label for="feedback-name" class="control-label">Name</label>
-                                <input type="text" class="form-control" id="feedback-name" placeholder="Your Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="feedback-email" class="control-label">Email</label>
-                                <input type="email" class="form-control" id="feedback-email" placeholder="Your Email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="feedback-feedback" class="control-label">Feedback</label>
-                                <textarea id="feedback-feedback" class="form-control no-resize" rows="5" placeholder="Your detailed feedback" required></textarea>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" form="feedback-form" class="btn btn-warning" id="send-feedback-btn"><i class="fa fa-paper-plane margin-r-5"></i>Send</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close margin-r-5"></i>Close</button>
-            </div>
-        </div>
-    </div>
-</div>

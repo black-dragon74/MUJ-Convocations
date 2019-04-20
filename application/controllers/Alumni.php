@@ -12,6 +12,21 @@ class Alumni extends CI_Controller
         parent::__construct();
         // Alumni else get the fuck out
         $this->alumniElseGTFO();
+
+        $this->load->helper('convocation');
+
+        // If maintenance redirect
+        if (getConfig($this, 'site_offline') == '1') {
+            $this->session->set_userdata('maintenance', '1');
+            redirect(site_url('maintenance'), 'refresh');
+        }
+        else {
+            // To reflect the live changes in the site active state
+            if ($this->session->userdata('maintenance') == '1') {
+                $this->session->unset_userdata('maintenance');
+                redirect(site_url('login'), 'refresh');
+            }
+        }
     }
 
     private function alumniElseGTFO() {
@@ -28,8 +43,22 @@ class Alumni extends CI_Controller
         $confirmed = $this->db->get_where('users', array('regno' => $regno))->row()->confirmed;
         $this->session->set_userdata('confirmed', $confirmed);
 
+        $eventArray = array();
+        $events = $this->db->get_where('event_days', array('disabled' => '0'));  // Only the dates that are not disabled.
+        if ($events) {
+            $array = $events->result_array();
+            foreach ($array as $ar) {
+                array_push($eventArray, $ar);
+            }
+        }
+
         $data['username'] = $username;
         $data['regno'] = $regno;
+
+        // Update the days
+        if (count($eventArray) > 0) {
+            $data['events'] = $eventArray;
+        }
 
         if ($confirmed != '1') {
             $data['title'] = 'Complete Profile';
@@ -50,14 +79,12 @@ class Alumni extends CI_Controller
         // Then, we update the alumni table with the name, regno, mobile and mail
 
         // The variables that we need
-        $name = $this->input->post('alumni-name');
         $regno = $this->input->post('alumni-regno');
         $attendDay = $this->input->post('alumni-attend-day');
         $withParent = $this->input->post('alumni-parents'); // 1 means coming with parents
         $formType  = $this->input->post('alumni-formtype');  // 1 if sending via post
         $address = $this->input->post('alumni-address');
         $altMobile = $this->input->post('alumni-alt-mobile');
-        $email = $this->input->post('alumni-email');
         $linkedin = $this->input->post('alumni-linkedin');
         $facebook = $this->input->post('alumni-facebook');
         $instagram = $this->input->post('alumni-instagram');
@@ -86,9 +113,6 @@ class Alumni extends CI_Controller
 
         // Alumni table payload
         $alumniPayload = array(
-            'regno' => $regno,
-            'name' => $name,
-            'email' => $email,
             'alt_mobile' => $altMobile,
             'address' => $address,
             'linkedin' => $linkedin,
@@ -389,7 +413,7 @@ class Alumni extends CI_Controller
         $formType = $currentUser->formtype;
 
         $paymentAmount = $formType == '1' ? '300.00' : '1000.00';
-        $paymentDesc = $formType == '1' ? 'Postal handling charges.' : 'Convocation uniform charges.';
+        $paymentDesc = $formType == '1' ? 'Postal handling charges' : 'Convocation uniform charges';
 
         $data['paymentAmount'] = $paymentAmount;
         $data['paymentDesc'] = $paymentDesc;

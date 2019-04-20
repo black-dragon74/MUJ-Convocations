@@ -104,3 +104,64 @@ function maskedEmail($email) {
 
     return substr($name,0, $len) . str_repeat('*', $len) . "@" . end($em);
 }
+
+/**
+ * @param $context
+ * Application's context
+ * @param $message
+ * Error message
+ * @param $url
+ * Redirect back to this URL
+ */
+function redirectError($context, $message, $url) {
+    $context->session->set_flashdata('error', $message);
+    redirect(site_url($url), 'refresh');
+}
+
+/**
+ * @param $context
+ * Application's context
+ * @param $message
+ * Success message
+ * @param $url
+ * Redirect back to this URL
+ */
+function redirectSuccess($context, $message, $url) {
+    $context->session->set_flashdata('success', $message);
+    redirect(site_url($url), 'refresh');
+}
+
+/**
+ * @param $ctx
+ * Context
+ * @param $config
+ * Config key
+ * @param $value
+ * Config value
+ * @return bool
+ * Whether the config was set or not
+ */
+function setConfig($ctx, $config, $value) {
+    $ctx->db->where('name', $config);
+    $update = $ctx->db->update('config', array(
+        'value' => $value
+    ));
+
+    return $update ? true : false;
+}
+
+/**
+ * @param $ctx
+ * Context
+ * @param $config
+ * Config key
+ * @return mixed
+ * Config value if exists in the DB else false
+ */
+function getConfig($ctx, $config) {
+    $resp = $ctx->db->get_where('config', array(
+        'name' => $config
+    ));
+
+    return $resp ? $resp->row()->value : false;
+}

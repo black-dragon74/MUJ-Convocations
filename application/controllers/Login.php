@@ -20,11 +20,22 @@ class Login extends CI_Controller
      * This function just renders the login web page to the user
      */
     public function index() {
+        // If maintenance, redirect
+        if ($this->session->userdata('maintenance') == '1') {
+            redirect(site_url('maintenance'), 'refresh');
+        }
+
         // If already logged in, redirect
         if ($this->session->userdata('alumni_login') == '1') {
             redirect(site_url('alumni'), 'refresh');
         }
 
+        // If admin, redirect
+        if ($this->session->userdata('admin_login') == '1') {
+            redirect(site_url('admin'), 'refresh');
+        }
+
+        // Else, load the login view
         $data['title'] = 'Login';
         $this->load->view('login', $data);
     }
@@ -118,28 +129,35 @@ class Login extends CI_Controller
             return;
         }
 
-        //TODO:- Check if the user is admin
+        $isAdmin = $this->db->get_where('admin', array('username' => $username))->row();
+
+        if ($isAdmin && password_verify($password, $isAdmin->password)) {
+            $this->session->set_userdata('admin_login', '1');
+            $this->session->set_userdata('name', $isAdmin->name);
+            redirect(site_url('alumni'), 'refresh');
+            return;
+        }
 
         // Check if the user is an alumni
         $isAlumni = $this->db->get_where('users', array('regno' => $username))->row();
 
-        if (!$isAlumni) {
-            $this->session->set_flashdata('error', 'Invalid username or password');
-            redirect(site_url('login'), 'refresh');
-            return;
-        }
-
         // Else, we check if the user has supplied a correct password
-        $hashedPassword = $isAlumni->password;
-        if (password_verify($password, $hashedPassword)) {
-            // Logim
-            $this->session->set_userdata('alumni_login', '1');
-            $this->session->set_userdata('regno', $isAlumni->regno);
-            $this->session->set_userdata('confirmed', $isAlumni->confirmed);
-            $alumniName = $this->db->get_where('alumni', array('regno' => $username))->row()->name;
-            $this->session->set_userdata('name', $alumniName);
-            redirect(site_url('alumni'), 'refresh');
-            return;
+        if ($isAlumni && password_verify($password, $isAlumni->password)) {
+            // Login
+            // If site offline, load that view
+            if (getConfig($this, 'site_offline') == '1') {
+                $this->session->set_userdata('maintenance', '1');
+                redirect(site_url('maintenance'), 'refresh');
+            }
+            else {
+                // Else, we proceed further
+                $this->session->set_userdata('alumni_login', '1');
+                $this->session->set_userdata('regno', $isAlumni->regno);
+                $this->session->set_userdata('confirmed', $isAlumni->confirmed);
+                $alumniName = $this->db->get_where('alumni', array('regno' => $username))->row()->name;
+                $this->session->set_userdata('name', $alumniName);
+                redirect(site_url('alumni'), 'refresh');
+            }
         }
         else {
             $this->session->set_flashdata('error', 'Invalid username or password');

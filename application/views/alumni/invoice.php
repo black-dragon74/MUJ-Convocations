@@ -3,13 +3,6 @@
 <script>
     $('ul > li:nth-child(5)').addClass("active");
 </script>
-<!-- Hack to prevent headers and footers in Print Mode -->
-<style>
-    @print{
-        @page :footer {color: #fff }
-        @page :header {color: #fff}
-    }
-</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -106,7 +99,7 @@
 
         <div class="row">
             <!-- accepted payments column -->
-            <div class="col-xs-6">
+            <div class="col-xs-6 overflow-hidden">
                 <p class="lead">Payment Methods:</p>
                 <img src="<?php echo base_url('assets/img/paytm_logo.png') ?>" alt="PayTM" class="margin-r-5">
                 <img src="<?php echo base_url('assets/img/secured_seals.png') ?>" alt="PayTM">

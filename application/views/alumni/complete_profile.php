@@ -77,9 +77,13 @@
                                     <label for="alumni-attend-day" class="control-label">Select Attending Day</label>
                                     <select name="alumni-attend-day" class="form-control" id="alumni-attend-day" required>
                                         <option value="">-- SELECT --</option>
-                                        <option value="1">Day 1</option>
-                                        <option value="2">Day 2</option>
-                                        <option value="3">Day 3</option>
+                                        <?php
+                                        if (isset($events)) {
+                                            foreach ($events as $event) {
+                                                echo '<option value="'. $event["value"] .'">'. $event["name"] .' ( '.$event["value"].')</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="col-md-5">
