@@ -290,7 +290,12 @@ class Alumni extends CI_Controller
         header("Expires: 0");
 
         // Now we need to construct the payment
-        $paymentAmount = $hasPaid->formtype == '1' ? '300' : '1000';
+        $paymentAmount = $hasPaid->formtype == '1' ? getConfig($this, 'post_fee') : getConfig($this, 'attend_fee');
+
+        if (empty($paymentAmount)) {
+            redirectError($this, 'In getting payment related data', 'alumni/fee');
+        }
+
         $paramList = array();
 
         $ORDER_ID = "ORDS" . rand(10000,99999999);
@@ -371,12 +376,12 @@ class Alumni extends CI_Controller
             }
             else {
                 $this->session->set_flashdata('error', 'Payment failed');
-                redirect(site_url('alumni'), 'refresh');
+                redirect(site_url('alumni/fee'), 'refresh');
             }
         }
         else {
             $this->session->set_flashdata('error', 'Payment was tampered with and hence has failed.');
-            redirect(site_url('alumni'), 'refresh');
+            redirect(site_url('alumni/fee'), 'refresh');
         }
     }
 

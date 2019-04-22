@@ -55,52 +55,10 @@
 
                             <!-- Row 2 -->
                             <div class="form-group">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <label for="alumni-formtype" class="control-label">Get your certs via</label>
-                                    <select name="alumni-formtype" class="form-control" id="alumni-formtype" required>
-                                        <option value="">-- SELECT --</option>
-                                        <option value="0">I am attending</option>
-                                        <option value="1">Send via post</option>
-                                    </select>
-                                    <small>Make sure you provide a valid postal address in case you opt for delivery via post.</small>
-                                </div>
-                                <div class="col-md-5">
+                                <div class="col-md-10 col-md-offset-1">
                                     <label for="alumni-mobile" class="control-label">Mobile</label>
                                     <input type="text" maxlength="10" minlength="10" pattern="\d*" class="form-control" value="<?php echo $currentUser->mobile ?>" name="alumni-mobile" disabled>
                                     <small>Please do not add country code in the input field</small>
-                                </div>
-                            </div>
-
-                            <!-- Row 3 -->
-                            <div class="form-group">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <label for="alumni-attend-day" class="control-label">Select Attending Day</label>
-                                    <select name="alumni-attend-day" class="form-control" id="alumni-attend-day" required>
-                                        <option value="">-- SELECT --</option>
-                                        <?php
-                                        if (isset($events)) {
-                                            foreach ($events as $event) {
-                                                echo '<option value="'. $event["value"] .'">'. $event["name"] .' ( '.$event["value"].')</option>';
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="alumni-parents" class="control-label">Accompained by parents</label>
-                                    <select name="alumni-parents" class="form-control" id="alumni-parents" required>
-                                        <option value="">-- SELECT --</option>
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Address box -->
-                            <div class="form-group hidden" id="alumni-address-box">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <label for="" class="control-label">Postal Address</label>
-                                    <textarea rows="5" name="alumni-address" id="alumni-address-text" class="form-control"><?php echo $currentUser->address ?></textarea>
                                 </div>
                             </div>
 
@@ -176,6 +134,67 @@
                                 </div>
                             </div>
 
+                            <hr>
+                            <!-- Event day and date selectors -->
+                            <h4 class="box-title">
+                                How would you like to attend?
+                            </h4>
+
+                            <br>
+                            <div class="col-xs-12">
+                                <div class="callout callout-danger">
+                                    <h4 class="no-padding no-margin">
+                                        Please fill the choices very carefully. Choices once filled cannot be changed again.
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <!-- Row 1, full width -->
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <label for="alumni-formtype" class="control-label">Get your certificates via</label>
+                                    <select name="alumni-formtype" class="form-control" id="alumni-formtype" required>
+                                        <option value="">-- SELECT --</option>
+                                        <option value="0">I am attending</option>
+                                        <option value="1">Send via post</option>
+                                    </select>
+                                    <small>Make sure you provide a valid postal address in case you opt for delivery via post.</small>
+                                </div>
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="form-group">
+                                <div class="col-md-5 col-md-offset-1">
+                                    <label for="alumni-attend-day" class="control-label">Select Attending Day</label>
+                                    <select name="alumni-attend-day" class="form-control" id="alumni-attend-day" disabled>
+                                        <option value="">-- SELECT --</option>
+                                        <?php
+                                        if (isset($events)) {
+                                            foreach ($events as $event) {
+                                                echo '<option value="'. $event["value"] .'">'. $event["name"] .' ( '.$event["value"].')</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="alumni-parents" class="control-label">Accompained by parents</label>
+                                    <select name="alumni-parents" class="form-control" id="alumni-parents" disabled>
+                                        <option value="">-- SELECT --</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Address box -->
+                            <div class="form-group hidden" id="alumni-address-box">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <label for="" class="control-label">Postal Address</label>
+                                    <textarea rows="5" name="alumni-address" id="alumni-address-text" class="form-control"><?php echo $currentUser->address ?></textarea>
+                                </div>
+                            </div>
+
                             <br>
                             <div class="form-group">
                                 <div class="col-sm-2 col-sm-offset-5">
@@ -207,7 +226,7 @@
                 required: false
             });
         }
-        else {
+        else if (result === '0') {
             $('#alumni-address-box').addClass('hidden');
             $('#alumni-address-text').prop('required', false);
 
@@ -219,6 +238,18 @@
             $('#alumni-parents').prop({
                 disabled: false,
                 required: true
+            });
+        }
+        else {
+            $('#alumni-address-box').addClass('hidden');
+            // Disable the attending day and parents option
+            $('#alumni-attend-day').prop({
+                disabled: true,
+                required: false
+            });
+            $('#alumni-parents').prop({
+                disabled: true,
+                required: false
             });
         }
     });

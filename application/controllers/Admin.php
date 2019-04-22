@@ -17,11 +17,11 @@ class Admin extends CI_Controller {
     {
         parent::__construct();
 
-        // Put intruders to the curb
-//        $this->adminOrGTFO();
-
         // Load the helper
         $this->load->helper('convocation');
+
+        // Put intruders to the curb
+        $this->adminOrGTFO();
     }
 
     /**
@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
      */
     public function adminOrGTFO() {
         if ($this->session->userdata('admin_login') != '1') {
-            echo "Fuck Off!";
+            redirectError($this, 'You must login first', 'login');
         }
     }
 
@@ -81,7 +81,7 @@ class Admin extends CI_Controller {
         $data['paid'] = $paid;
 
         // Update dates only if there is some value in the database
-        if (!empty($startDate) || empty($lastDate)) {
+        if (!empty($startDate) && !empty($lastDate)) {
             $data['startDate'] = $startDate;
             $data['lastDate'] = $lastDate;
         }
@@ -501,5 +501,37 @@ class Admin extends CI_Controller {
         else {
             redirectError($this, 'Failed to reset the password', 'admin');
         }
+    }
+
+    /**
+     * Function to handle the event fee related changes
+     */
+    public function update_fees() {
+        var_dump($_POST);
+
+        $eventType = $this->input->post('event-type');
+        $eventPrice = $this->input->post('event-price');
+
+        if (empty($eventPrice) || empty($eventType)) {
+            die();
+        }
+        $success = false;
+
+        switch ($eventType) {
+            case 'attend':
+                $success = setConfig($this, 'attend_fee', $eventPrice);
+                break;
+            case 'post':
+                $success = setConfig($this, 'post_fee', $eventPrice);
+                break;
+            default:
+                break;
+        }
+
+        $success
+            ?
+            redirectSuccess($this, 'Event fees updated successfully.', 'admin')
+            :
+            redirectError($this, 'Unable to update event fees', 'admin');
     }
 }

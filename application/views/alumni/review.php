@@ -36,7 +36,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="box box-success">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/img/nick.jpg')?>" alt="User profile picture">
+                        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/img/avatar.png')?>" alt="User profile picture">
 
                         <h3 class="profile-username text-center"><?php echo $currentUser->name ?></h3>
 

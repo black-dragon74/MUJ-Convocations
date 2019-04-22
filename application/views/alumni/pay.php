@@ -34,8 +34,8 @@
                             <div class="col-xs-12" style="font-size: 20px;">
                                 <p>Please keep in mind:</p>
                                 <ul>
-                                    <li>You will have to pay Rs. 300/- if you opted to get your certs via post.</li>
-                                    <li>You will have to pay Rs. 1000/- if you are attending the ceremony.</li>
+                                    <li>You will have to pay Rs. <?php echo getConfig($this, 'post_fee') ?>/- if you opted to get your certs via post.</li>
+                                    <li>You will have to pay Rs. <?php echo getConfig($this, 'attend_fee') ?>/- if you are attending the ceremony.</li>
                                 </ul>
                             </div>
                         </div>

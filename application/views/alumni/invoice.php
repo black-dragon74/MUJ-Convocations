@@ -46,8 +46,7 @@
                     <strong>Manipal University</strong><br>
                     Jaipur-Ajmer Expressway,<br>
                     Dehmi Kalan, Rajasthan, 303007<br>
-                    Phone: +91-141-3999100<br>
-                    Email: admissions@jaipur.manipal.edu
+                    Phone: +91-141-3999100
                 </address>
             </div>
             <!-- /.col -->

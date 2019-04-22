@@ -142,7 +142,7 @@
 
             <!-- Update event days -->
             <div class="col-md-6">
-                <div class="box box-info">
+                <div class="box box-primary">
                     <div class="box-header">
                         <h4 class="box-title">
                             Update event days
@@ -202,6 +202,41 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row containing elements for updating fee amount for post and attendance -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">
+                            Update fees for events
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form action="<?php echo site_url('admin/update_fees')?>" autocomplete="off" method="post">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="event-type" class="control-label">Select Event</label>
+                                    <select name="event-type" id="event-type" class="form-control" required>
+                                        <option value="">-- SELECT --</option>
+                                        <option value="attend">Attending the ceremony</option>
+                                        <option value="post">Send certificates via post</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="event-price" class="control-label">Enter Price</label>
+                                    <input type="number" name="event-price" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label">Update</label>
+                                    <input type="submit" class="btn btn-info form-control">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -325,7 +360,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="box box-default">
+                <div class="box box-danger">
                     <div class="box-header">
                         <h4 class="box-title">
                             Reset password of Administrator
@@ -342,6 +377,101 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last row, download consolidated report -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">
+                            Download consolidated Excel report
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form action="">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="" class="control-label">Select Program</label>
+                                    <select name="program" id="program_select" class="form-control" onchange="onselectedprogram()">
+                                        <option value="-1">All</option>
+                                        <option value="1">Arts and Law</option>
+                                        <option value="2">Design</option>
+                                        <option value="3">Engineering</option>
+                                        <option value="4">Science</option>
+                                        <option value="5">Management and Commerce</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="control-label">Select School</label>
+                                    <select name="school" id="school_select" class="form-control" onchange="onselectedSchool()">
+                                        <option value="-1">All</option>
+                                        <option value="1">Law</option>
+                                        <option value="2">Humanities and social Sciences</option>
+                                        <option value="3">Media and Communication</option>
+                                        <option value="4">Architecture and Design</option>
+                                        <option value="5">Built Environment</option>
+                                        <option value="6">Planning and Design</option>
+                                        <option value="7">Electrical and ECE</option>
+                                        <option value="8">Automobile, Mech and Mechatronics</option>
+                                        <option value="9">Computing and IT</option>
+                                        <option value="10">Civil and Chemical</option>
+                                        <option value="11">Basic Sciences</option>
+                                        <option value="12">Buisness and Commerce</option>
+                                        <option value="13">Hotel Management</option>
+                                        <option value="14">TAPMI School of Buisness</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="control-label">Select Department</label>
+                                    <select name="department" id="department_select" class="form-control">
+                                        <option value="-1">All</option>
+                                        <option value="1">ECE</option>
+                                        <option value="2">EE</option>
+                                        <option value="3">Civil</option>
+                                        <option value="4">Chemical</option>
+                                        <option value="5">Mecanical</option>
+                                        <option value="6">Mechatronics</option>
+                                        <option value="7">Automobile</option>
+                                        <option value="8">IT</option>
+                                        <option value="9">CSE</option>
+                                        <option value="10">CCE</option>
+                                        <option value="11">TAPMI school of Buisness</option>
+                                        <option value="12">Commerce</option>
+                                        <option value="13">Buisness Administration</option>
+                                        <option value="14">Hotel Management</option>
+                                        <option value="15">Physics</option>
+                                        <option value="16">Chemistry</option>
+                                        <option value="17">Bio Sciences</option>
+                                        <option value="18">Mathematics and Statistics</option>
+                                        <option value="19">Law</option>
+                                        <option value="20">Language</option>
+                                        <option value="21">Arts</option>
+                                        <option value="22">JMandC</option>
+                                        <option value="23">Economics</option>
+                                        <option value="24">Psychology</option>
+                                        <option value="25">Architecture and Design</option>
+                                        <option value="26">Planning</option>
+                                        <option value="27">Fashion Design</option>
+                                        <option value="28">Interior Design</option>
+                                        <option value="29">Fine Arts</option>
+                                        <option value="30">MBA</option>
+                                    </select>
+                                    <br>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-4 col-xs-offset-4">
+                                    <input type="submit" class="form-control btn btn-info" value="Download">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -499,6 +629,693 @@
             });
         }
     });
+</script>
+
+<script type="text/javascript">
+    function onselectedprogram() {
+        // alert("okay");
+        var listProgram = document.getElementById("program_select");
+        var listSchool = document.getElementById("school_select");
+        var listDepartment = document.getElementById("department_select");
+        var myselect = listProgram.options[listProgram.selectedIndex].value;
+        while (listSchool.options.length > 0) {
+            listSchool.options[0] = null;
+        }
+        while (listDepartment.options.length > 0) {
+            listDepartment.options[0] = null;
+        }
+        if(myselect == -1){
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "Law";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "Humanities and Social Science";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "3";
+            opt.innerHTML = "Media and Communicaion";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "4";
+            opt.innerHTML = "Architecture and Design";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Centere for Built Environment";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "Planning and Design";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Electrical and ECE";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "Automobile, Mech and MEchatronics";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "Computing and IT";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "Civil and Chemical";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "11";
+            opt.innerHTML = "Basic Sciences";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "12";
+            opt.innerHTML = "Business and Commerce";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "13";
+            opt.innerHTML = "Hotel Management";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "14";
+            opt.innerHTML = "Tapmi School of Business";
+            listSchool.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "ECE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "EE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "3";
+            opt.innerHTML = "Civil";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "4";
+            opt.innerHTML = "Chemical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Mechanical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "Mechatronics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Automobile";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "IT";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "CSE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "CCE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "11";
+            opt.innerHTML = "Tapmi School of Business";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "12";
+            opt.innerHTML = "Commerce";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "13";
+            opt.innerHTML = "Business Management";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "14";
+            opt.innerHTML = "Hotel Management";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "15";
+            opt.innerHTML = "Physics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "16";
+            opt.innerHTML = "Chemistry";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "17";
+            opt.innerHTML = "Biology";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "18";
+            opt.innerHTML = "Mathematics and Statistics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "19";
+            opt.innerHTML = "Law";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "20";
+            opt.innerHTML = "Languages";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "21";
+            opt.innerHTML = "Arts";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "22";
+            opt.innerHTML = "JMandC";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "23";
+            opt.innerHTML = "Economics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "24";
+            opt.innerHTML = "Psychology";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "25";
+            opt.innerHTML = "Architecture and Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "26";
+            opt.innerHTML = "Planning";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "27";
+            opt.innerHTML = "Fashion Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "28";
+            opt.innerHTML = "Interior Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "29";
+            opt.innerHTML = "Fine Arts";
+            listDepartment.appendChild(opt);
+
+
+
+
+        }
+        else if(myselect == 1){
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "Law";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "Humanities and Social Science";
+            listSchool.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "19";
+            opt.innerHTML = "Law";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "20";
+            opt.innerHTML = "Languages";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "21";
+            opt.innerHTML = "Arts";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "22";
+            opt.innerHTML = "JMandC";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "23";
+            opt.innerHTML = "Economics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "24";
+            opt.innerHTML = "Psychology";
+            listDepartment.appendChild(opt);
+
+
+
+        }
+        else if(myselect == 2){
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+
+
+            opt.innerHTML = "Architecture and Design";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Centere for Built Environment";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "Planning and Design";
+            listSchool.appendChild(opt);
+
+
+
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+
+
+
+
+        }
+        else if(myselect == 3){
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+
+
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Electrical and ECE";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "Automobile, Mech and MEchatronics";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "Computing and IT";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "Civil and Chemical";
+            listSchool.appendChild(opt);
+            var opt = document.createElement('option');
+
+
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "ECE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "EE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "3";
+            opt.innerHTML = "Civil";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "4";
+            opt.innerHTML = "Chemical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Mechanical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "MEchatronics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Automobile";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "IT";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "CSE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "CCE";
+            listDepartment.appendChild(opt);
+
+
+
+        }
+        else if(myselect == 4){
+
+            // Science
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "11";
+            opt.innerHTML = "Basic Sciences";
+            listSchool.appendChild(opt);
+
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "15";
+            opt.innerHTML = "Physics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "16";
+            opt.innerHTML = "Chemistry";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "17";
+            opt.innerHTML = "Biology";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "18";
+            opt.innerHTML = "Mathematics and Statistics";
+            listDepartment.appendChild(opt);
+
+
+
+        }
+        else if(myselect == 5){
+
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listSchool.appendChild(opt);
+
+
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+
+        }
+
+    }
+
+    function onselectedSchool() {
+
+        var listSchool = document.getElementById("school_select");
+        var listDepartment = document.getElementById("department_select");
+
+        var myselect = listSchool.options[listSchool.selectedIndex].value;
+        while (listDepartment.options.length > 0) {
+            listDepartment.options[0] = null;
+        }
+
+        if(myselect==-1){
+            var opt = document.createElement('option');
+            opt.value = "-1";
+            opt.innerHTML = "ALL";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "ECE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "EE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "3";
+            opt.innerHTML = "Civil";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "4";
+            opt.innerHTML = "Chemical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Mechanical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "MEchatronics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Automobile";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "IT";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "CSE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "CCE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "11";
+            opt.innerHTML = "Tapmi School of Business";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "12";
+            opt.innerHTML = "Commerce";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "13";
+            opt.innerHTML = "Business Management";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "14";
+            opt.innerHTML = "Hotel Management";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "15";
+            opt.innerHTML = "Physics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "16";
+            opt.innerHTML = "Chemistry";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "17";
+            opt.innerHTML = "Biology";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "18";
+            opt.innerHTML = "Mathematics and Statistics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "19";
+            opt.innerHTML = "Law";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "20";
+            opt.innerHTML = "Languages";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "21";
+            opt.innerHTML = "Arts";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "22";
+            opt.innerHTML = "JMandC";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "23";
+            opt.innerHTML = "Economics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "24";
+            opt.innerHTML = "Psychology";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "25";
+            opt.innerHTML = "Architecture and Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "26";
+            opt.innerHTML = "Planning";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "27";
+            opt.innerHTML = "Fashion Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "28";
+            opt.innerHTML = "Interior Design";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "29";
+            opt.innerHTML = "Fine Arts";
+            listDepartment.appendChild(opt);
+
+
+        }
+
+        else if(myselect==7){
+            var opt = document.createElement('option');
+            opt.value = "1";
+            opt.innerHTML = "ECE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "2";
+            opt.innerHTML = "EE";
+            listDepartment.appendChild(opt);
+
+        }
+
+        else if(myselect==8){
+            var opt = document.createElement('option');
+            opt.value = "5";
+            opt.innerHTML = "Mechanical";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "6";
+            opt.innerHTML = "Mechatronics";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "7";
+            opt.innerHTML = "Automobile";
+            listDepartment.appendChild(opt);
+
+
+        }
+        else if(myselect==9){
+            var opt = document.createElement('option');
+            opt.value = "8";
+            opt.innerHTML = "IT";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "9";
+            opt.innerHTML = "CSE";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "10";
+            opt.innerHTML = "CCE";
+            listDepartment.appendChild(opt);
+
+
+        }
+        else if(myselect==10){
+            var opt = document.createElement('option');
+            opt.value = "3";
+            opt.innerHTML = "Civil";
+            listDepartment.appendChild(opt);
+
+            var opt = document.createElement('option');
+            opt.value = "4";
+            opt.innerHTML = "Chemical";
+            listDepartment.appendChild(opt);t
+        }
+
+    }
 </script>
 <?php include_once 'includes/footer.php';
 include_once 'includes/bottom_scripts.php' ?>

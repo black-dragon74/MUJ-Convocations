@@ -24,8 +24,8 @@
             <div class="col-xs-12">
                 <div class="callout callout-warning">
                     <h4><i class="fa fa-info-circle margin-r-5"></i>Note</h4>
-                    <h4>
-                        Please pay your convocation fees in order to complete your registration.
+                    <h4 id="pay-fee-now">
+                        Please click here to pay your fees and complete your registration.
                     </h4>
                 </div>
             </div>
@@ -34,14 +34,14 @@
         <!--Row 2-->
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-danger box-solid collapsed-box">
+                <div class="box box-danger">
                     <div class="box-header">
                         <h4 class="box-title text-bold">
                             Instructions for the graduates
                         </h4>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-plus"></i>
+                                <i class="fa fa-minus"></i>
                             </button>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
         <!-- Row 3 -->
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-success box-solid">
+                <div class="box box-success">
                     <div class="box-header">
                         <h4 class="box-title text-bold">
                             Steps for registration
@@ -147,8 +147,9 @@
                                         Once you paid the fee, keep the Order ID/Payment ID, Date of payment and Amount paid, required for filling the request form.
                                     </li>
                                 </ul>
+                                <hr>
                                 <p>
-                                    For any future assistance in registration , Please write us at: <b>convocation@jaipur.manipal.edu</b>
+                                    For any future assistance, Please write us at: <b>convocation@jaipur.manipal.edu</b>
                                 </p>
                             </div>
                         </div>
@@ -169,7 +170,15 @@
             $('#alumni-address-box').addClass('hidden');
             $('#alumni-address-text').prop('required', false);
         }
-    })
+    });
+
+    // I am lazy to type HTML and css and hence handling clicks via JS, this is fun though ;)
+    $('#pay-fee-now').on('click', function () {
+       window.location = '<?php echo site_url('alumni/fee') ?>';
+    }).css({
+        'cursor': 'pointer',
+        'user-select': 'none'
+    });
 </script>
 <?php include_once 'includes/footer.php';
 include_once 'includes/bottom_scripts.php' ?>
