@@ -417,7 +417,7 @@ class Alumni extends CI_Controller
         // Further calculations for the payment amount, If form type is 1, 300 else 1000
         $formType = $currentUser->formtype;
 
-        $paymentAmount = $formType == '1' ? '300.00' : '1000.00';
+        $paymentAmount = $formType == '1' ? getConfig($this, 'post_fee') : getConfig($this, 'attend_fee');
         $paymentDesc = $formType == '1' ? 'Postal handling charges' : 'Convocation uniform charges';
 
         $data['paymentAmount'] = $paymentAmount;
