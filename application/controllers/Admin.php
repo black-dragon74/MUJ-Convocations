@@ -226,7 +226,7 @@ class Admin extends CI_Controller {
 
     /**
      * I get details for an user and return a JSON object for parsing back in the DOM
-     * Note that this function shold always return values in JSON format else website will fuck itself up
+     * Note that this function should always return values in JSON format else website will fuck itself up
      */
     public function ajax_get_user() {
         // Verify that the AJAX is valid
@@ -533,5 +533,151 @@ class Admin extends CI_Controller {
             redirectSuccess($this, 'Event fees updated successfully.', 'admin')
             :
             redirectError($this, 'Unable to update event fees', 'admin');
+    }
+
+    /**
+     * Function to admit a student manually
+     */
+    public function add_student_manually() {
+        // Get the values form the POST payload
+        $regNo = $this->input->post('reg_no');
+        $name = $this->input->post('alumni_name');
+        $email = $this->input->post('email');
+        $mobile = $this->input->post('phone');
+        $gpa = $this->input->post('gpa');
+        $dob = $this->input->post('dob');
+        $program = $this->input->post('program');
+        $school = $this->input->post('school');
+        $dept = $this->input->post('dept');
+        $address = $this->input->post('address');
+
+        // Sanity check for the required fields
+        if (!isset($regNo) || !isset($name) || !isset($email) || !isset($mobile)) {
+            redirectError($this, 'Invalid form submitted.', 'admin');
+        }
+
+        // Else create the payload for the database
+        $payload = array(
+            'regno' => $regNo,
+            'name' => $name,
+            'email' => $email,
+            'mobile' => $mobile,
+            'gpa' => $gpa,
+            'dob' => $dob,
+            'programme' => $program,
+            'school' => $school,
+            'department' => $dept,
+            'address' => $address
+        );
+
+        // Insert the data in the DB
+        $inserted = $this->db->insert('alumni', $payload);
+
+        $inserted
+            ?
+            redirectSuccess($this, 'Student added successfully', 'admin')
+            :
+            redirectError($this, 'Unable to add the student', 'admin');
+    }
+
+    /**
+     * Loads the frontend editor
+     */
+    public function frontend_editor()
+    {
+        $data['title'] = 'Frontend Editor';
+        $this->load->view('admin/frontend_editor', $data);
+    }
+
+    /**
+     * handles actual updation of the home page
+     */
+    public function update_home()
+    {
+        $homeContent = $this->input->post('home');
+
+        if (!isset($homeContent)) {
+            return;
+        }
+
+        // Else update the DB
+        $this->db->where('name', 'home');
+        $updated = $this->db->update('html_content', array('content' => $homeContent));
+
+        if ($updated) {
+            redirectSuccess($this, 'Page content updated successfully', 'admin/frontend_editor');
+        }
+        else {
+            redirectError($this, 'Page content updation failed', 'admin/frontend_editor');
+        }
+    }
+
+    /**
+     * handles actual updation of the guidelines page
+     */
+    public function update_guidelines()
+    {
+        $homeContent = $this->input->post('guidelines');
+
+        if (!isset($homeContent)) {
+            return;
+        }
+
+        // Else update the DB
+        $this->db->where('name', 'guidelines');
+        $updated = $this->db->update('html_content', array('content' => $homeContent));
+
+        if ($updated) {
+            redirectSuccess($this, 'Page content updated successfully', 'admin/frontend_editor');
+        }
+        else {
+            redirectError($this, 'Page content updation failed', 'admin/frontend_editor');
+        }
+    }
+
+    /**
+     * handles actual updation of the instructions page
+     */
+    public function update_instructions()
+    {
+        $homeContent = $this->input->post('instructions');
+
+        if (!isset($homeContent)) {
+            return;
+        }
+
+        // Else update the DB
+        $this->db->where('name', 'instructions');
+        $updated = $this->db->update('html_content', array('content' => $homeContent));
+
+        if ($updated) {
+            redirectSuccess($this, 'Page content updated successfully', 'admin/frontend_editor');
+        }
+        else {
+            redirectError($this, 'Page content updation failed', 'admin/frontend_editor');
+        }
+    }
+
+    /**
+     * handles actual updation of the contact page
+     */
+    public function update_contact()
+    {
+        $homeContent = $this->input->post('contact');
+
+        if (!isset($homeContent)) {
+            return;
+        }
+
+        // Else update the DB
+        $this->db->where('name', 'contact');
+        $updated = $this->db->update('html_content', array('content' => $homeContent));
+
+        if ($updated) {
+            redirectSuccess($this, 'Page content updated successfully', 'admin/frontend_editor');
+        }
+        else {
+            redirectError($this, 'Page content updation failed', 'admin/frontend_editor');
+        }
     }
 }

@@ -14,6 +14,8 @@
 <script src="<?php echo base_url('bower_components/fastclick/lib/fastclick.js')?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('dist/js/adminlte.min.js')?>"></script>
+<!-- CK Editor -->
+<script src="<?php echo base_url('bower_components/ckeditor/ckeditor.js') ?>"></script>
 <!-- Custom JS -->
 <script src="<?php echo base_url('dist/js/custom.js')?>"></script>
 <!-- Error Handler -->

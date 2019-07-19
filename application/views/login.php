@@ -2,7 +2,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?php echo site_url('login') ?>"><b>MUJ Convocations</b></a>
+        <a href="<?php echo site_url('welcome') ?>"><b>MUJ Convocations</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -10,11 +10,11 @@
 
         <form action="<?php echo site_url('login/validate_login')?>" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Registration Number" name="username">
+                <input type="text" class="form-control" placeholder="Registration Number" name="username" required>
                 <span class="glyphicon glyphicon-info-sign form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">

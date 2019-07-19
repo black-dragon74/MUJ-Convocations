@@ -27,7 +27,7 @@ function email($context, $subject, $to, $message) {
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'smtp.zoho.com';
     $config['smtp_user'] = 'noreply@nicksuniversum.com';
-    $config['smtp_pass'] = 'QdN66LzNDzcnEBJ';
+    $config['smtp_pass'] = 'RmMail74Sch#';
     $config['smtp_port'] = '465';
     $config['smtp_crypto'] = 'ssl';
     $config['newline'] = "\r\n";

@@ -207,6 +207,80 @@
             </div>
         </div>
 
+        <!-- Row to admit a new student manually -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Add student manually
+                        </h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form action="<?php echo site_url('admin/add_student_manually') ?>" method="post" class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="reg_no" placeholder="Registration Number" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="alumni_name" placeholder="Student Name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="phone" placeholder="Mobile Number" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="gpa" placeholder="GPA">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control date-picker-alt" name="dob" placeholder="DOB (DD-MM-YYY)">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="program" placeholder="Program">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="school" placeholder="School">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="dept" placeholder="Department">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="alumni_name" placeholder="" disabled>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <textarea name="address" id="" cols="30" rows="5" class="form-control" placeholder="Address"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <input type="submit" value="Add student" class="btn btn-success form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Row containing elements for updating fee amount for post and attendance -->
         <div class="row">
             <div class="col-xs-12">

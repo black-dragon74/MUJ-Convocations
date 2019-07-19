@@ -2,7 +2,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="<?php echo site_url('login') ?>"><b>MUJ Convocations</b></a>
+        <a href="<?php echo site_url('welcome') ?>"><b>MUJ Convocations</b></a>
     </div>
 
     <div class="register-box-body">

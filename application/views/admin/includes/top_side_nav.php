@@ -63,6 +63,12 @@
                     </span> -->
                 </a>
             </li>
+
+            <li>
+                <a href="<?php echo site_url('admin/frontend_editor') ?>">
+                    <i class="fa fa-edit"></i> <span>Frontend Editor</span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
