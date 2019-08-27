@@ -159,6 +159,7 @@ class Admin extends CI_Controller {
             try {
                 $reader = IOFactory::createReader('Xlsx');
                 $spreadsheet = $reader->load($uploadedFile);
+                $spreadsheet->setActiveSheetIndex(0);
                 $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
                 $success = 0;
@@ -176,7 +177,7 @@ class Admin extends CI_Controller {
                         $payload['batch'] = $value['4'];
                         $payload['branch'] = $value['5'];
                         $payload['mobile'] = $value['6'];
-                        $payload['email'] = $value['7'];
+                        $payload['email'] = strtolower($value['7']);
 
                         // Attempt to insert in the DB
                         $inserted = $this->db->insert('alumni', $payload);
