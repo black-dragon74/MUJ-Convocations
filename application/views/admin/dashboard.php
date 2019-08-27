@@ -469,7 +469,7 @@
                         <form action="">
                             <div class="form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Select Program</label>
+                                    <label for="" class="control-label">Select Faculty</label>
                                     <select name="program" id="program_select" class="form-control" onchange="onselectedprogram()">
                                         <option value="-1">All</option>
                                         <option value="1">Arts and Law</option>

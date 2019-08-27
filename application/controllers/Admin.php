@@ -106,16 +106,14 @@ class Admin extends CI_Controller {
         try {
             // Insert the values
             $spreadsheet->setActiveSheetIndex(0)    // Should not have more than 1 sheet anyways!
-                ->setCellValue('A1', 'Name')
-                ->setCellValue('B1', 'RegNo')
-                ->setCellValue('C1', 'Email')
-                ->setCellValue('D1', 'Contact')
-                ->setCellValue('E1', 'GPA')
-                ->setCellValue('F1', 'DOB')
-                ->setCellValue('G1', 'Program')
-                ->setCellValue('H1', 'School')
-                ->setCellValue('I1', 'Department')
-                ->setCellValue('J1', 'Address');
+                ->setCellValue('A1', 'RegNo')
+                ->setCellValue('B1', 'Name')
+                ->setCellValue('C1', 'Gender')
+                ->setCellValue('D1', 'Degree')
+                ->setCellValue('E1', 'Batch')
+                ->setCellValue('F1', 'Branch')
+                ->setCellValue('G1', 'Contact')
+                ->setCellValue('H1', 'Email');
 
             // Set a few properties on the spreadsheet
             $spreadsheet->getProperties()
@@ -171,16 +169,14 @@ class Admin extends CI_Controller {
                     if ($key != '0') {
                         // Create a payload
                         $payload = array();
-                        $payload['name'] = $value['0'];
-                        $payload['regno'] = $value['1'];
-                        $payload['email'] = $value['2'];
-                        $payload['mobile'] = $value['3'];
-                        $payload['gpa'] = $value['4'];
-                        $payload['dob'] = $value['5'];
-                        $payload['programme'] = $value['6'];
-                        $payload['school'] = $value['7'];
-                        $payload['department'] = $value['8'];
-                        $payload['address'] = $value['9'];
+                        $payload['regno'] = $value['0'];
+                        $payload['name'] = $value['1'];
+                        $payload['gender'] = $value['2'];
+                        $payload['degree'] = $value['3'];
+                        $payload['batch'] = $value['4'];
+                        $payload['branch'] = $value['5'];
+                        $payload['mobile'] = $value['6'];
+                        $payload['email'] = $value['7'];
 
                         // Attempt to insert in the DB
                         $inserted = $this->db->insert('alumni', $payload);

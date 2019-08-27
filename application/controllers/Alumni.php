@@ -221,23 +221,6 @@ class Alumni extends CI_Controller
     }
 
     /**
-     * I just load the review details section
-     */
-    public function review_details() {
-        $username = $this->session->userdata('name');
-        $regno = $this->session->userdata('regno');
-        $data['username'] = $username;
-        $data['regno'] = $regno;
-        $data['title'] = 'Review Details';
-
-        if ($this->session->userdata('confirmed') != '1') {
-            redirect(site_url('alumni'), 'refresh');
-        }
-
-        $this->load->view('alumni/review', $data);
-    }
-
-    /**
      * I load the fee payment view
      */
     public function fee() {

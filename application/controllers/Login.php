@@ -87,12 +87,12 @@ class Login extends CI_Controller
         $generatedPassword = substr(md5(rand(100000000,20000000000)), 0, 10);
 
         $name = $allowed->name;
-        $content = getPasswordEmailHTML($name, $generatedPassword);
+        $content = getPasswordEmailHTML($name, $regNo, $generatedPassword);
 
         // Step 2, send the email, if it is successful, update the password in the database
         $userEmail = $allowed->email;
         if (!email($this, 'Registration Successful', $userEmail, $content)) {
-            #show_error($this->email->print_debugger());
+//            show_error($this->email->print_debugger());
             $this->session->set_flashdata('error', 'Failed to send the password mail.');
             redirect(site_url('login/register'), 'refresh');
             return;

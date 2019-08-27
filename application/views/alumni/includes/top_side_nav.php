@@ -63,11 +63,6 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('alumni/review_details') ?>">
-                    <i class="fa fa-check"></i> <span>Review Details</span>
-                </a>
-            </li>
-            <li>
                 <a href="<?php echo site_url('alumni/fee') ?>">
                     <i class="fa fa-mouse-pointer"></i> <span>Pay Fees Online</span>
                 </a>

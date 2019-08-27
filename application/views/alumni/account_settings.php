@@ -1,7 +1,7 @@
 <?php include_once 'includes/top_scripts.php'; include_once 'includes/top_side_nav.php'; ?>
 <?php $currentUser = $this->db->get_where('alumni', array('regno' => $regno))->row(); ?>
 <script>
-    $('ul > li:nth-child(6)').addClass("active");
+    $('ul > li:nth-child(5)').addClass("active");
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

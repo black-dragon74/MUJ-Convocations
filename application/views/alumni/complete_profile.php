@@ -57,7 +57,7 @@
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
                                     <label for="alumni-mobile" class="control-label">Mobile</label>
-                                    <input type="text" maxlength="10" minlength="10" pattern="\d*" class="form-control" value="<?php echo $currentUser->mobile ?>" name="alumni-mobile" disabled>
+                                    <input type="text" maxlength="10" minlength="10" pattern="\d*" class="form-control" value="<?php echo $currentUser->mobile ? $currentUser->mobile : 'NA' ?>" name="alumni-mobile" disabled>
                                     <small>Please do not add country code in the input field</small>
                                 </div>
                             </div>

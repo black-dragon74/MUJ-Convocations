@@ -1,7 +1,7 @@
 <?php include_once 'includes/top_scripts.php'; include_once 'includes/top_side_nav.php'; ?>
 <?php $currentUser = $this->db->get_where('alumni', array('regno' => $regno))->row(); ?>
 <script>
-    $('ul > li:nth-child(5)').addClass("active");
+    $('ul > li:nth-child(4)').addClass("active");
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -21,7 +21,7 @@
     <div class="pad margin no-print">
         <div class="callout callout-success" style="margin-bottom: 0!important;">
            <h4 style="margin: 0;">
-               Your payment is complete. Here is your invoice for further reference.
+               Your payment and registration is complete. Here is your invoice for further reference.
            </h4>
         </div>
     </div>
@@ -54,8 +54,8 @@
                 To
                 <address>
                     <strong><?php echo $currentUser->name ?></strong><br>
-                    <?php echo $currentUser->address ?><br>
-                    Phone: <?php echo $currentUser->mobile ?><br>
+                    <?php echo $currentUser->address ? $currentUser->address : 'Address: NA' ?><br>
+                    Phone: <?php echo $currentUser->mobile ? $currentUser->mobile : 'NA' ?><br>
                     Email: <?php echo $currentUser->email ?>
                 </address>
             </div>
