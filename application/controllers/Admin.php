@@ -265,11 +265,8 @@ class Admin extends CI_Controller {
         $name = $this->input->post('name');
         $email = $this->input->post('email');
         $mobile = $this->input->post('mobile');
-        $altMobile = $this->input->post('alt-mobile');
-        $programme = $this->input->post('faculty');
-        $school = $this->input->post('school');
-        $dept = $this->input->post('dept');
-        $dob = $this->input->post('dob');
+        $pincode = $this->input->post('pincode');
+        $address = $this->input->post('address');
 
         // First check if the user really exists
         $userExists = $this->db->get_where('alumni', array('regno' => $regno))->row();
@@ -286,11 +283,8 @@ class Admin extends CI_Controller {
             'name' => $name,
             'email' => $email,
             'mobile' => $mobile,
-            'alt_mobile' => $altMobile,
-            'programme' => $programme,
-            'school' => $school,
-            'department' => $dept,
-            'dob' => $dob
+            'pincode' => $pincode,
+            'address' => $address
         ));
 
         if ($updated) {
@@ -541,11 +535,11 @@ class Admin extends CI_Controller {
         $name = $this->input->post('alumni_name');
         $email = $this->input->post('email');
         $mobile = $this->input->post('phone');
-        $gpa = $this->input->post('gpa');
-        $dob = $this->input->post('dob');
-        $program = $this->input->post('program');
-        $school = $this->input->post('school');
-        $dept = $this->input->post('dept');
+        $gender = $this->input->post('gender');
+        $degree = $this->input->post('degree');
+        $batch = $this->input->post('batch');
+        $branch = $this->input->post('branch');
+        $pincode = $this->input->post('pincode');
         $address = $this->input->post('address');
 
         // Sanity check for the required fields
@@ -559,11 +553,11 @@ class Admin extends CI_Controller {
             'name' => $name,
             'email' => $email,
             'mobile' => $mobile,
-            'gpa' => $gpa,
-            'dob' => $dob,
-            'programme' => $program,
-            'school' => $school,
-            'department' => $dept,
+            'gender' => $gender,
+            'degree' => $degree,
+            'batch' => $batch,
+            'branch' => $branch,
+            'pincode' => $pincode,
             'address' => $address
         );
 
