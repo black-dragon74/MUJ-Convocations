@@ -285,7 +285,7 @@ class Alumni extends CI_Controller
         $CUST_ID = 'USR'.$regno;
         $MSISDN = $currUser->mobile;
         $EMAIL = $currUser->email;
-        $INDUSTRY_TYPE_ID = 'Retail';
+        $INDUSTRY_TYPE_ID = 'PrivateEducation';
         $CHANNEL_ID = 'WEB';
         $TXN_AMOUNT = $paymentAmount;
 

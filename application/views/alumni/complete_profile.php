@@ -96,15 +96,6 @@
                                     <input type="text" class="form-control" name="alumni-instagram">
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="alumni-pincode" class="control-label">Pincode</label>
-                                    <input type="text" class="form-control" name="alumni-pincode">
-
-                                </div>
-                            </div>
-
-                            <!-- Row 7 -->
-                            <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
                                     <label for="alumni-current-state">You are currently</label>
                                     <select class="form-control" name="alumni-current-state" id="alumni-current-state" required>
                                         <option value="">-- Select --</option>
@@ -193,6 +184,11 @@
                                     <label for="" class="control-label">Postal Address</label>
                                     <textarea rows="5" name="alumni-address" id="alumni-address-text" class="form-control"><?php echo $currentUser->address ?></textarea>
                                 </div>
+
+                                <div class="col-md-10 col-md-offset-1">
+                                    <label for="alumni-pincode" class="control-label">Pincode</label>
+                                    <input type="text" class="form-control" name="alumni-pincode" id="alumni-pincode">
+                                </div>
                             </div>
 
                             <br>
@@ -215,6 +211,7 @@
             // Show the address box and make it required
             $('#alumni-address-box').removeClass('hidden');
             $('#alumni-address-text').prop('required', true);
+            $('#alumni-pincode').prop('required', true);
 
             // Disable the attending day and parents option
             $('#alumni-attend-day').prop({
@@ -229,6 +226,7 @@
         else if (result === '0') {
             $('#alumni-address-box').addClass('hidden');
             $('#alumni-address-text').prop('required', false);
+            $('#alumni-pincode').prop('required', false);
 
             // Enable the attending day and parents option
             $('#alumni-attend-day').prop({
