@@ -452,11 +452,11 @@ class Admin extends CI_Controller {
         $this->db->where('regno', $regno);
 
         $result = $this->db->update('users', array(
-            'password' => password_hash('123', PASSWORD_BCRYPT)
+            'password' => password_hash($this->config->item('def_pass'), PASSWORD_BCRYPT)
         ));
 
         if ($result) {
-            redirectSuccess($this, 'Password reset to: 123', 'admin');
+            redirectSuccess($this, 'Password reset to: ' . $this->config->item('def_pass'), 'admin');
         }
         else {
             redirectError($this, 'Failed to reset the password', 'admin');
@@ -483,11 +483,11 @@ class Admin extends CI_Controller {
         $this->db->where('username', $email);
 
         $result = $this->db->update('admin', array(
-            'password' => password_hash('123', PASSWORD_BCRYPT)
+            'password' => password_hash($this->config->item('def_pass'), PASSWORD_BCRYPT)
         ));
 
         if ($result) {
-            redirectSuccess($this, 'Password reset to: 123', 'admin');
+            redirectSuccess($this, 'Password reset to: ' . $this->config->item('def_pass'), 'admin');
         }
         else {
             redirectError($this, 'Failed to reset the password', 'admin');
@@ -669,6 +669,126 @@ class Admin extends CI_Controller {
         }
         else {
             redirectError($this, 'Page content updation failed', 'admin/frontend_editor');
+        }
+    }
+
+    /**
+     * Generates a consolidated report of all the confirmed users till date and dumps and excel sheet for the same
+     */
+    public function download_report()
+    {
+        // Create a new empty spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        // Cell header indices, will be used to automate the spreadsheet creation process
+        $cellHeaders = array(
+            'A1',
+            'B1',
+            'C1',
+            'D1',
+            'E1',
+            'F1',
+            'G1',
+            'H1',
+            'I1',
+            'J1'
+        );
+
+        // Initial titles, the first row in our dump
+        $cellHeaderTitles = array(
+            'S. No',
+            'Reg No',
+            'Name',
+            'Degree',
+            'Form Type',
+            'Attn. Day',
+            'Amount',
+            'Order ID',
+            'Txn ID',
+            'Payment Date'
+        );
+
+        $attendAmount = getConfig($this, 'attend_fee');
+        $postAmount = getConfig($this, 'post_fee');
+
+        // Wraaping this in a try catch block as the operations below might throw
+        try{
+            // Set the active sheet index to be the first worksheet
+            $spreadsheet->setActiveSheetIndex(0);
+
+            // Write the first row (headers) to the excel file
+            foreach ($cellHeaders as $i => $header)
+            {
+                $spreadsheet->getActiveSheet()->setCellValue($header, $cellHeaderTitles[$i]);
+            }
+
+            // Now is the time to get the actual data from the DB, below is the query to execute
+            $query = "select users.regno, name, degree, formtype, day, orderid, txnid, paymentdate from users join alumni on users.regno = alumni.regno where paid != 0";
+
+            $dbResult = $this->db->query($query)->result_array();
+
+            if ($dbResult)
+            {
+                $startWritingAtIndex = 2;
+                $counter = 1;
+                foreach ($dbResult as $i => $result)
+                {
+                    // Set the correct serial number
+                    $spreadsheet->getActiveSheet()->setCellValue('A'.$startWritingAtIndex, $counter);
+
+                    // Write the array as it is to the spreadsheet
+                    $spreadsheet->getActiveSheet()->fromArray($result, 'NA', 'B'.$startWritingAtIndex);
+
+                    // Now is the time to shift the values, get the values first
+                    $formType = $spreadsheet->getActiveSheet()->getCell('E'.$startWritingAtIndex)->getValue();
+                    $attendDay = $spreadsheet->getActiveSheet()->getCell('F'.$startWritingAtIndex)->getValue();
+                    $orderID = $spreadsheet->getActiveSheet()->getCell('G'.$startWritingAtIndex)->getValue();
+                    $txnID = $spreadsheet->getActiveSheet()->getCell('H'.$startWritingAtIndex)->getValue();
+                    $payDate = $spreadsheet->getActiveSheet()->getCell('I'.$startWritingAtIndex)->getValue();
+
+                    // Decide the payment amount
+                    $payAmt = $formType == '1' ? $postAmount : $attendAmount;
+
+                    // Shift the cells to right
+                    $spreadsheet->getActiveSheet()->setCellValue('E'.$startWritingAtIndex, $formType == '1' ? 'POST' : 'ATTEND');
+                    $spreadsheet->getActiveSheet()->setCellValue('F'.$startWritingAtIndex, ((int)$attendDay + 1));
+                    $spreadsheet->getActiveSheet()->setCellValue('G'.$startWritingAtIndex, $payAmt);
+                    $spreadsheet->getActiveSheet()->setCellValue('H'.$startWritingAtIndex, $orderID);
+                    $spreadsheet->getActiveSheet()->setCellValue('I'.$startWritingAtIndex, $txnID);
+                    $spreadsheet->getActiveSheet()->setCellValue('J'.$startWritingAtIndex, $payDate);
+
+                    // Increment the counters
+                    $startWritingAtIndex++;
+                    $counter++;
+                }
+            }
+            else {
+                redirectError($this, 'No records to generate report for', 'admin');
+            }
+
+            // Set a few properties on the spreadsheet
+            $spreadsheet->getProperties()
+                ->setCreator('Nick')
+                ->setSubject('Consolidated Report for the Convocation');
+
+            // Set the doc title
+            $docTitle = 'report_on_' . date('d-M-Y');
+            $spreadsheet->getActiveSheet()->setTitle($docTitle);
+
+            // Create a new writer object
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+            // Tell the browser to expect a Excel format response
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="'.$docTitle.'.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            // Throw the file back to the browser and we are done
+            $writer->save('php://output');
+        }
+        catch (\PhpOffice\PhpSpreadsheet\Exception $e)
+        {
+            redirectError($this, 'Unable to create the spreadsheet', 'admin');
         }
     }
 }

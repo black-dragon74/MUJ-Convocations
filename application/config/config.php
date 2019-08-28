@@ -530,3 +530,12 @@ $config['proxy_ips'] = '';
 | Indicates the current version of this convocation software
 */
 $config['program_version'] = '1.0';
+
+/*
+|--------------------------------------------------------------------------
+| Default reset password
+|--------------------------------------------------------------------------
+|
+| This is the password that will be set when resetting the password by Admin
+*/
+$config['def_pass'] = '283d215c1';

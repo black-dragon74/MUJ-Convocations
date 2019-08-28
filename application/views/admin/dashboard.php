@@ -463,87 +463,14 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <h4 class="box-title">
-                            Download consolidated Excel report (not working as of now)
+                            Download consolidated Excel report
                         </h4>
                     </div>
                     <div class="box-body">
-                        <form action="">
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="" class="control-label">Select Faculty</label>
-                                    <select name="program" id="program_select" class="form-control" onchange="onselectedprogram()">
-                                        <option value="-1">All</option>
-                                        <option value="1">Arts and Law</option>
-                                        <option value="2">Design</option>
-                                        <option value="3">Engineering</option>
-                                        <option value="4">Science</option>
-                                        <option value="5">Management and Commerce</option>
-                                    </select>
-                                    <br>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="control-label">Select School</label>
-                                    <select name="school" id="school_select" class="form-control" onchange="onselectedSchool()">
-                                        <option value="-1">All</option>
-                                        <option value="1">Law</option>
-                                        <option value="2">Humanities and social Sciences</option>
-                                        <option value="3">Media and Communication</option>
-                                        <option value="4">Architecture and Design</option>
-                                        <option value="5">Built Environment</option>
-                                        <option value="6">Planning and Design</option>
-                                        <option value="7">Electrical and ECE</option>
-                                        <option value="8">Automobile, Mech and Mechatronics</option>
-                                        <option value="9">Computing and IT</option>
-                                        <option value="10">Civil and Chemical</option>
-                                        <option value="11">Basic Sciences</option>
-                                        <option value="12">Buisness and Commerce</option>
-                                        <option value="13">Hotel Management</option>
-                                        <option value="14">TAPMI School of Buisness</option>
-                                    </select>
-                                    <br>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="control-label">Select Department</label>
-                                    <select name="department" id="department_select" class="form-control">
-                                        <option value="-1">All</option>
-                                        <option value="1">ECE</option>
-                                        <option value="2">EE</option>
-                                        <option value="3">Civil</option>
-                                        <option value="4">Chemical</option>
-                                        <option value="5">Mecanical</option>
-                                        <option value="6">Mechatronics</option>
-                                        <option value="7">Automobile</option>
-                                        <option value="8">IT</option>
-                                        <option value="9">CSE</option>
-                                        <option value="10">CCE</option>
-                                        <option value="11">TAPMI school of Buisness</option>
-                                        <option value="12">Commerce</option>
-                                        <option value="13">Buisness Administration</option>
-                                        <option value="14">Hotel Management</option>
-                                        <option value="15">Physics</option>
-                                        <option value="16">Chemistry</option>
-                                        <option value="17">Bio Sciences</option>
-                                        <option value="18">Mathematics and Statistics</option>
-                                        <option value="19">Law</option>
-                                        <option value="20">Language</option>
-                                        <option value="21">Arts</option>
-                                        <option value="22">JMandC</option>
-                                        <option value="23">Economics</option>
-                                        <option value="24">Psychology</option>
-                                        <option value="25">Architecture and Design</option>
-                                        <option value="26">Planning</option>
-                                        <option value="27">Fashion Design</option>
-                                        <option value="28">Interior Design</option>
-                                        <option value="29">Fine Arts</option>
-                                        <option value="30">MBA</option>
-                                    </select>
-                                    <br>
-                                </div>
-                            </div>
-
+                        <form action="<?php echo site_url('admin/download_report') ?>" method="post">
                             <div class="form-group">
                                 <div class="col-xs-4 col-xs-offset-4">
-                                    <input type="submit" class="form-control btn btn-info" value="Download">
+                                    <input type="submit" class="form-control btn btn-info" value="Click here to download">
                                 </div>
                             </div>
                         </form>
