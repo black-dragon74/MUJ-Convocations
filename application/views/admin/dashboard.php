@@ -98,6 +98,33 @@
             </div>
         </div>
 
+        <!-- Hacked row to show number of regs per day -->
+        <?php if (isset($events)) {?>
+        <div class="row">
+            <?php foreach ($events as $event) {
+                $dateVal = $event["value"];
+                $numStud = $this->db->get_where('users', array('day' => $dateVal))->num_rows();
+                ?>
+            <div class="col-lg-4 col-xs-6">
+                <div class="small-box bg-fuchsia">
+                    <div class="inner">
+                        <h3 class="count-fast"><?php echo $numStud ?></h3>
+                        <p>Students Attending</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-info-circle"></i>
+                    </div>
+                    <p class="small-box-footer">
+                        On <?php echo $dateVal ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+            }
+                ?>
+        </div>
+        <?php } ?>
+
         <!-- Second row, add new admin and add event days -->
         <div class="row">
             <!-- Add new Admin -->
