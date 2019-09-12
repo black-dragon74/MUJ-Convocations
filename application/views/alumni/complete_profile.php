@@ -143,11 +143,11 @@
                             <!-- Row 1, full width -->
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
-                                    <label for="alumni-formtype" class="control-label">Get your certificates via</label>
+                                    <label for="alumni-formtype" class="control-label">I would like to</label>
                                     <select name="alumni-formtype" class="form-control" id="alumni-formtype" required>
                                         <option value="">-- SELECT --</option>
-                                        <option value="0">I am attending</option>
-                                        <option value="1">Send via post</option>
+                                        <option value="0">Attend the convocation ceremony</option>
+                                        <option value="1">Get certificates via post</option>
                                     </select>
                                     <small>Make sure you provide a valid postal address in case you opt for delivery via post.</small>
                                 </div>
