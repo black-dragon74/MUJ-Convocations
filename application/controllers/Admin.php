@@ -691,7 +691,8 @@ class Admin extends CI_Controller {
             'G1',
             'H1',
             'I1',
-            'J1'
+            'J1',
+            'K1'
         );
 
         // Initial titles, the first row in our dump
@@ -700,6 +701,7 @@ class Admin extends CI_Controller {
             'Reg No',
             'Name',
             'Degree',
+            'Branch',
             'Form Type',
             'Attn. Day',
             'Amount',
@@ -723,7 +725,7 @@ class Admin extends CI_Controller {
             }
 
             // Now is the time to get the actual data from the DB, below is the query to execute
-            $query = "select users.regno, name, degree, formtype, day, orderid, txnid, paymentdate from users join alumni on users.regno = alumni.regno where paid != 0";
+            $query = "select users.regno, name, degree, branch, formtype, day, orderid, txnid, paymentdate from users join alumni on users.regno = alumni.regno where paid != 0";
 
             $dbResult = $this->db->query($query)->result_array();
 
@@ -740,22 +742,22 @@ class Admin extends CI_Controller {
                     $spreadsheet->getActiveSheet()->fromArray($result, 'NA', 'B'.$startWritingAtIndex);
 
                     // Now is the time to shift the values, get the values first
-                    $formType = $spreadsheet->getActiveSheet()->getCell('E'.$startWritingAtIndex)->getValue();
-                    $attendDay = $spreadsheet->getActiveSheet()->getCell('F'.$startWritingAtIndex)->getValue();
-                    $orderID = $spreadsheet->getActiveSheet()->getCell('G'.$startWritingAtIndex)->getValue();
-                    $txnID = $spreadsheet->getActiveSheet()->getCell('H'.$startWritingAtIndex)->getValue();
-                    $payDate = $spreadsheet->getActiveSheet()->getCell('I'.$startWritingAtIndex)->getValue();
+                    $formType = $spreadsheet->getActiveSheet()->getCell('F'.$startWritingAtIndex)->getValue();
+                    $attendDay = $spreadsheet->getActiveSheet()->getCell('G'.$startWritingAtIndex)->getValue();
+                    $orderID = $spreadsheet->getActiveSheet()->getCell('H'.$startWritingAtIndex)->getValue();
+                    $txnID = $spreadsheet->getActiveSheet()->getCell('I'.$startWritingAtIndex)->getValue();
+                    $payDate = $spreadsheet->getActiveSheet()->getCell('J'.$startWritingAtIndex)->getValue();
 
                     // Decide the payment amount
                     $payAmt = $formType == '1' ? $postAmount : $attendAmount;
 
                     // Shift the cells to right
-                    $spreadsheet->getActiveSheet()->setCellValue('E'.$startWritingAtIndex, $formType == '1' ? 'POST' : 'ATTEND');
-                    $spreadsheet->getActiveSheet()->setCellValue('F'.$startWritingAtIndex, $attendDay);
-                    $spreadsheet->getActiveSheet()->setCellValue('G'.$startWritingAtIndex, $payAmt);
-                    $spreadsheet->getActiveSheet()->setCellValue('H'.$startWritingAtIndex, $orderID);
-                    $spreadsheet->getActiveSheet()->setCellValue('I'.$startWritingAtIndex, $txnID);
-                    $spreadsheet->getActiveSheet()->setCellValue('J'.$startWritingAtIndex, $payDate);
+                    $spreadsheet->getActiveSheet()->setCellValue('F'.$startWritingAtIndex, $formType == '1' ? 'POST' : 'ATTEND');
+                    $spreadsheet->getActiveSheet()->setCellValue('G'.$startWritingAtIndex, $attendDay);
+                    $spreadsheet->getActiveSheet()->setCellValue('H'.$startWritingAtIndex, $payAmt);
+                    $spreadsheet->getActiveSheet()->setCellValue('I'.$startWritingAtIndex, $orderID);
+                    $spreadsheet->getActiveSheet()->setCellValue('J'.$startWritingAtIndex, $txnID);
+                    $spreadsheet->getActiveSheet()->setCellValue('K'.$startWritingAtIndex, $payDate);
 
                     // Increment the counters
                     $startWritingAtIndex++;
