@@ -751,7 +751,7 @@ class Admin extends CI_Controller {
 
                     // Shift the cells to right
                     $spreadsheet->getActiveSheet()->setCellValue('E'.$startWritingAtIndex, $formType == '1' ? 'POST' : 'ATTEND');
-                    $spreadsheet->getActiveSheet()->setCellValue('F'.$startWritingAtIndex, ((int)$attendDay + 1));
+                    $spreadsheet->getActiveSheet()->setCellValue('F'.$startWritingAtIndex, $attendDay);
                     $spreadsheet->getActiveSheet()->setCellValue('G'.$startWritingAtIndex, $payAmt);
                     $spreadsheet->getActiveSheet()->setCellValue('H'.$startWritingAtIndex, $orderID);
                     $spreadsheet->getActiveSheet()->setCellValue('I'.$startWritingAtIndex, $txnID);
