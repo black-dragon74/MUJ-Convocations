@@ -13,6 +13,9 @@
                 <input type="number" name="regNo" class="form-control" placeholder="Registration Number" max="999999999" required>
                 <span class="glyphicon glyphicon-info-sign form-control-feedback"></span>
             </div>
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('gre_site_key'); ?>"></div>
+            </div>
             <div class="row">
                 <div class="col-xs-4 pull-right">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>

@@ -171,3 +171,29 @@ function getConfig($ctx, $config) {
 
     return $resp ? $resp->row()->value : false;
 }
+
+/**
+ * @param $ctx
+ * Application context
+ * @param $gResponse
+ * The submitted form's reCAPTCHA response
+ * @param $clientIP
+ * The client's IP Address for API verification
+ *
+ * @return bool
+ * Returns if the submitted form is valid or not.
+ *
+ * Function to verify the submitted form using Google reCAPTCHA and keep the tinkerers at bay.
+ */
+function verifyGRecaptcha($ctx, $gResponse, $clientIP)
+{
+    $secretKey = $ctx->config->item('gre_secret_key');
+
+    // Send a request to the server and get back the response
+    $gresult = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$gResponse."&remoteip=".$clientIP);
+
+    // Decode the JSON
+    $grekeys = json_decode($gresult, true);
+
+    return intval($grekeys["success"]) === 1;
+}

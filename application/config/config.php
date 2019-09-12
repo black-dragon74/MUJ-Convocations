@@ -539,3 +539,21 @@ $config['program_version'] = '1.0';
 | This is the password that will be set when resetting the password by Admin
 */
 $config['def_pass'] = '283d215c1';
+
+/*
+|--------------------------------------------------------------------------
+| reCAPTCHA site key
+|--------------------------------------------------------------------------
+|
+| This is the site key for google reCAPTCHA
+*/
+$config['gre_site_key'] = '6LeVFLgUAAAAAKZ7BdyvpMFJZJv5Evi9wuBjJWjs';
+
+/*
+|--------------------------------------------------------------------------
+| reCAPTCHA secret key
+|--------------------------------------------------------------------------
+|
+| This is the secret key for google reCAPTCHA
+*/
+$config['gre_secret_key'] = '6LeVFLgUAAAAAO32s07Y2FbWK6bH9kpCEnngkyC8';

@@ -83,6 +83,12 @@ class Login extends CI_Controller
             return;
         }
 
+        // Verify reCAPTCHA
+        if (!verifyGRecaptcha($this, $_POST['g-recaptcha-response'], $_POST['REMOTE_ADDR'])) {
+            redirectError($this, 'Invalid form submitted', 'login/register');
+            return;
+        }
+
         // Step 1, generate a random password
         $generatedPassword = substr(md5(rand(100000000,20000000000)), 0, 10);
 
@@ -126,6 +132,12 @@ class Login extends CI_Controller
         $password = $this->input->post('password');
 
         if (empty($username) || empty($password)) {
+            return;
+        }
+
+        // Verify reCAPTCHA
+        if (!verifyGRecaptcha($this, $_POST['g-recaptcha-response'], $_POST['REMOTE_ADDR'])) {
+            redirectError($this, 'Invalid form submitted', 'login');
             return;
         }
 
@@ -203,6 +215,12 @@ class Login extends CI_Controller
         if (!$validUser) {
             $this->session->set_flashdata('error', 'Password reset not allowed.');
             redirect(site_url('login/forgot_password'), 'refresh');
+            return;
+        }
+
+        // Verify reCAPTCHA
+        if (!verifyGRecaptcha($this, $_POST['g-recaptcha-response'], $_POST['REMOTE_ADDR'])) {
+            redirectError($this, 'Invalid form submitted', 'login/forgot_password');
             return;
         }
 
