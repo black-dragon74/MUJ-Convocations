@@ -104,12 +104,13 @@
             <?php foreach ($events as $event) {
                 $dateVal = $event["value"];
                 $numStud = $this->db->get_where('users', array('day' => $dateVal))->num_rows();
+                $numStudPaid = $this->db->get_where('users', array('day' => $dateVal, 'paid' => '1'))->num_rows();
                 ?>
             <div class="col-lg-4 col-xs-6">
                 <div class="small-box bg-fuchsia">
                     <div class="inner">
-                        <h3 class="count-fast"><?php echo $numStud ?></h3>
-                        <p>Students Attending</p>
+                        <h3 class="count-fast"><?php echo $numStudPaid ?></h3>
+                        <p>Students paid of total <?php echo $numStud ?> registered</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-info-circle"></i>
