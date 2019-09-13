@@ -197,3 +197,25 @@ function verifyGRecaptcha($ctx, $gResponse, $clientIP)
 
     return intval($grekeys["success"]) === 1;
 }
+
+/**
+ * Function that returns a formatted HTML message for successful registration with name and selected date
+ *
+ * @param $name
+ * Alumni Name
+ *
+ * @param $date
+ * Attending date as selected by the alumni
+ *
+ * @return string
+ * Formatted HTML message ready to be sent to the alumni
+ */
+function getSuccessFulHTMLMessage($name, $date)
+{
+    $message = 'Dear '.$name.',<br>';
+    $message .= 'Your registration has been confirmed for the date: '. $date. '<br>';
+    $message .= 'Further details like rehearsal, gown distribution and reporting timings will be updated soon on the convocation portal.'.'<br><br>';
+    $message .= 'Regards,<br>';
+    $message .= 'MUJ Convocations';
+    return $message;
+}

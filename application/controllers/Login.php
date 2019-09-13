@@ -255,4 +255,39 @@ class Login extends CI_Controller
             redirect(site_url('login/forgot_password'), 'refresh');
         }
     }
+
+    /**
+     * Function that can only be called using the program asynchronously for sending sucess email
+     */
+    public function sendAlumMsg()
+    {
+
+        // Pass the params as it is to the send email function
+        $params = $_POST;
+
+        if (!isset($params['allowed'])) {
+            return;
+        }
+
+        // Call the function
+        $this->sendConfirmEmail($params);
+    }
+
+    /**
+     * A function that actually sends the successful email
+     *
+     * @param $params
+     * An assoc array of the $_POST variables
+     */
+    private function sendConfirmEmail($params)
+    {
+        // Extract the values from the POST payload
+        $to = $params['alumEmail'];
+        $name = $params['alumName'];
+        $date = $params['atnDate'];
+        $msg = getSuccessFulHTMLMessage($name, $date);
+
+        // And this is the last step, i.e. send the email
+        email($this, 'Registration Complete', $to, $msg);
+    }
 }

@@ -354,6 +354,32 @@ class Alumni extends CI_Controller
 
                 $this->db->where('regno', $this->session->userdata('regno'));
                 if ($this->db->update('users', $userPayload)) {
+                    // Send the email for the successful registration, asynchronously
+                    $this->load->library('async');
+
+                    // Just in case the initialization fails
+                    if (isset($this->async)) {
+                        // Build the URL and params as required by the Async library
+                        $url = site_url('login/sendalummsg');
+
+                        // Get the values from the session
+                        $username = $this->session->userdata('name');
+                        $regno = $this->session->userdata('regno');
+                        $atDate = $this->db->get_where('users', array('regno' => $regno))->row()->date;
+                        $userEmail = $this->db->get_where('alumni', array('regno' => $regno))->row()->email;
+
+                        // Params will contain the name and date
+                        $params = array(
+                            'allowed' => '1',
+                            'alumName' => $username,
+                            'atnDate' => $atDate,
+                            'alumEmail' => $userEmail
+                        );
+
+                        // Call the function now with the params
+                        $this->async->execute($url, $params);
+                    }
+
                     redirect(site_url('alumni/invoice'), 'refresh');
                 }
             }
