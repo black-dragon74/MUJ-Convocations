@@ -242,6 +242,7 @@ class Login extends CI_Controller
         // Hash the password
         $hashedPassword = password_hash($generatedPassword, PASSWORD_BCRYPT);
 
+        $this->db->where('regno', $username);
         $dbresult = $this->db->update('users', array(
             'password' => $hashedPassword
         ));
