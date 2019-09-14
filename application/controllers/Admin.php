@@ -456,9 +456,11 @@ class Admin extends CI_Controller {
         ));
 
         if ($result) {
+            $this->db->close();
             redirectSuccess($this, 'Password reset to: ' . $this->config->item('def_pass'), 'admin');
         }
         else {
+            $this->db->close();
             redirectError($this, 'Failed to reset the password', 'admin');
         }
     }

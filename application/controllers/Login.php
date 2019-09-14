@@ -247,10 +247,12 @@ class Login extends CI_Controller
         ));
 
         if ($dbresult) {
+            $this->db->close();
             $this->session->set_flashdata('success', 'Password resetted and sent to your email '.maskedEmail($userEmail));
             redirect(site_url('login/forgot_password'), 'refresh');
         }
         else {
+            $this->db->close();
             $this->session->set_flashdata('error', 'Failed to reset the password.');
             redirect(site_url('login/forgot_password'), 'refresh');
         }
