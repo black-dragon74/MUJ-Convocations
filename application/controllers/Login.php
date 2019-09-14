@@ -90,7 +90,7 @@ class Login extends CI_Controller
         }
 
         // Step 1, generate a random password
-        $generatedPassword = substr(md5(rand(100000000,20000000000)), 0, 10);
+        $generatedPassword = substr(sha1(time()), 0, 10);
 
         $name = $allowed->name;
         $content = getPasswordEmailHTML($name, $regNo, $generatedPassword);
@@ -225,7 +225,7 @@ class Login extends CI_Controller
         }
 
         // Step 1, Generate a new password
-        $generatedPassword = substr(md5(rand(100000000,20000000000)), 0, 10);
+        $generatedPassword = substr(sha1(time()), 0, 10);
 
         $name = $this->db->get_where('alumni', array('regno' => $username))->row()->name;
         $content = getPasswordResetEmailHTML($name, $generatedPassword);
