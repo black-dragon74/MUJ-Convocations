@@ -71,6 +71,17 @@ class Admin extends CI_Controller {
             }
         }
 
+        $daysArray = array();
+        $days = $this->db->get('event_days');
+        if ($days)
+        {
+            $arr = $days->result_array();
+            foreach ($arr as $a)
+            {
+                array_push($daysArray, $a);
+            }
+        }
+
         // Put the data in the payload
         $data['users'] = $users;
         $data['confirmed'] = $confirmed;
@@ -89,6 +100,11 @@ class Admin extends CI_Controller {
         // Update the days
         if (count($eventArray) > 0) {
             $data['events'] = $eventArray;
+        }
+
+        if (count($daysArray) > 0)
+        {
+            $data["days"] = $daysArray;
         }
 
         // Load the view with the data

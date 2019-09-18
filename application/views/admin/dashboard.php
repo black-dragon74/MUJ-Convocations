@@ -99,10 +99,10 @@
         </div>
 
         <!-- Hacked row to show number of regs per day -->
-        <?php if (isset($events)) {?>
+        <?php if (isset($days)) {?>
         <div class="row">
-            <?php foreach ($events as $event) {
-                $dateVal = $event["value"];
+            <?php foreach ($days as $day) {
+                $dateVal = $day["value"];
                 $numStud = $this->db->get_where('users', array('day' => $dateVal))->num_rows();
                 $numStudPaid = $this->db->get_where('users', array('day' => $dateVal, 'paid' => '1'))->num_rows();
                 ?>
