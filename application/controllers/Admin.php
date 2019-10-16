@@ -811,4 +811,96 @@ class Admin extends CI_Controller {
             redirectError($this, 'Unable to create the spreadsheet', 'admin');
         }
     }
+
+    /**
+     * Downloads report of users who have registered but have not paid their fees
+     */
+    public function download_unpaid_report()
+    {
+        $type = $this->input->post('reqtype');
+
+        if (!isset($type))
+            die();
+
+        $spreadsheet = new Spreadsheet();
+
+        // Cell header indices, will be used to automate the spreadsheet creation process
+        $cellHeaders = array(
+            'A1',
+            'B1',
+            'C1',
+            'D1',
+            'E1',
+            'F1'
+        );
+
+        // Initial titles, the first row in our dump
+        $cellHeaderTitles = array(
+            'S. No',
+            'Reg No',
+            'Name',
+            'Degree',
+            'Branch',
+            'Email'
+        );
+
+        // Write the initial rows
+        try {
+            $spreadsheet->setActiveSheetIndex(0);
+
+            foreach ($cellHeaders as $i => $header) {
+                $spreadsheet->getActiveSheet()->setCellValue($header, $cellHeaderTitles[$i]);
+            }
+
+            if ($type === "0")
+            {
+                $query = "select users.regno, name, degree, branch, email from users join alumni on users.regno = alumni.regno where paid = 0";
+            }
+            else
+            {
+                $query = "select regno, name, degree, branch, email from alumni where regno not in(Select regno from users)";
+            }
+
+            $dbResult = $this->db->query($query)->result_array();
+
+            if ($dbResult) {
+                $startWritingAtIndex = 2;
+                $counter = 1;
+                foreach ($dbResult as $i => $result) {
+                    // Set the correct serial number
+                    $spreadsheet->getActiveSheet()->setCellValue('A' . $startWritingAtIndex, $counter);
+
+                    // Write the array as it is to the spreadsheet
+                    $spreadsheet->getActiveSheet()->fromArray($result, 'NA', 'B' . $startWritingAtIndex);
+
+                    $startWritingAtIndex++;
+                    $counter++;
+                }
+            }
+
+            // Set a few properties on the spreadsheet
+            $spreadsheet->getProperties()
+                ->setCreator('Nick')
+                ->setSubject('Custom Report for the Convocation');
+
+            // Set the doc title
+            $docTitle = 'custom_report_on_' . date('d-M-Y');
+            $spreadsheet->getActiveSheet()->setTitle($docTitle);
+
+            // Create a new writer object
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+            // Tell the browser to expect a Excel format response
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="'.$docTitle.'.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            // Throw the file back to the browser and we are done
+            $writer->save('php://output');
+        }
+        catch (\PhpOffice\PhpSpreadsheet\Exception $e)
+        {
+            redirectError($this, 'Unable to create the spreadsheet', 'admin');
+        }
+    }
 }

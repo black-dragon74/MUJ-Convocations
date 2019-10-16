@@ -485,7 +485,7 @@
             </div>
         </div>
 
-        <!-- Last row, download consolidated report -->
+        <!-- Download consolidated report -->
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-info">
@@ -499,6 +499,35 @@
                             <div class="form-group">
                                 <div class="col-xs-4 col-xs-offset-4">
                                     <input type="submit" class="form-control btn btn-info" value="Click here to download">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download unpaid report -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h4 class="box-title">
+                            Download unpaid/unregistered Excel report
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form action="<?php echo site_url('admin/download_unpaid_report') ?>" method="post">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <select name="reqtype" class="form-control" required>
+                                        <option value="">-- SELECT --</option>
+                                        <option value="0">Download Unpiad Report</option>
+                                        <option value="1">Download unregistered Report</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="submit" class="form-control btn btn-success" value="Click here to download">
                                 </div>
                             </div>
                         </form>
