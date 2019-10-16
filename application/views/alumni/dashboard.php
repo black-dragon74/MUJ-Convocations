@@ -31,13 +31,13 @@
                 </div>
             </div>
         </div>
-        <?php } else { ?>
+        <?php } else { $day = $this->db->get_where('users', array('regno' => $regno))->row()->day ?>
         <div class="row">
             <div class="col-xs-12">
                 <div class="callout callout-success">
                     <h4><i class="fa fa-check margin-r-5"></i>Note</h4>
                     <h4 id="get-invoice-now">
-                        Your registration process is complete. Click here to get your invoice.
+                        Your registration is complete & confirmed for date <?php echo (isset($day) && $day !== '') ? $day : 'NA' ?>. Click here to get your invoice.
                     </h4>
                 </div>
             </div>
