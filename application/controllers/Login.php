@@ -20,8 +20,16 @@ class Login extends CI_Controller
      * This function just renders the login web page to the user
      */
     public function index() {
+        // Support for override
+        if ($this->input->get('admin') == 'yes')
+        {
+            $data['title'] = 'Login';
+            $this->load->view('login', $data);
+            return;
+        }
+
         // If maintenance, redirect
-        if ($this->session->userdata('maintenance') == '1') {
+        if ($this->session->userdata('maintenance') == '1' || getConfig($this, 'site_offline') == '1') {
             redirect(site_url('maintenance'), 'refresh');
         }
 
@@ -146,7 +154,7 @@ class Login extends CI_Controller
         if ($isAdmin && password_verify($password, $isAdmin->password)) {
             $this->session->set_userdata('admin_login', '1');
             $this->session->set_userdata('name', $isAdmin->name);
-            redirect(site_url('alumni'), 'refresh');
+            redirect(site_url('admin'), 'refresh');
             return;
         }
 

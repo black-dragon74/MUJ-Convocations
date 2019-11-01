@@ -34,7 +34,7 @@
     <div class="lockscreen-logo">
         <b>MUJ</b>Convocations
     </div>
-    <div class="lockscreen-name">Offline for scheduled maintenance.</div>
+    <div class="lockscreen-name">Further registrations are closed for now.</div>
     <br>
 </div>
 <a href="<?php echo site_url('login/logout') ?>" class="btn btn-default btn-flat" style="position: fixed; top: 0; right: 0;" title="Logout">Logout</a>
